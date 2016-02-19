@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.canvas.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.collections.FXCollections ?>
+<?scenebuilder-stylesheet ui.css?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="514.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="metaheuristics.project.agp.gui.Controller">
+	<top>
+		<VBox BorderPane.alignment="CENTER">
+			<children>
+				<MenuBar fx:id="menu">
+					<menus>
+						<Menu mnemonicParsing="false" text="Datoteka">
+							<items>
+								<MenuItem fx:id="file_chose" mnemonicParsing="false" onAction="#onFileChooseClicked" text="Izaberi test datoteku" />
+								<MenuItem mnemonicParsing="false" text="Nacrtaj tlocrt" />
+							</items>
+						</Menu>
+						<Menu mnemonicParsing="false" text="Uređivanje">
+							<items>
+								<MenuItem fx:id="ocisti" mnemonicParsing="false" onAction="#onClearClicked" text="Očisti prostor za crtanje" />
+							</items>
+						</Menu>
+					</menus>
+					<VBox.margin>
+						<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+					</VBox.margin>
+				</MenuBar>
+			</children>
+		</VBox>
+	</top>
+	<right>
+		<VBox alignment="BASELINE_LEFT" prefHeight="414.0" prefWidth="214.0" BorderPane.alignment="CENTER">
+			<children>
+				<Label contentDisplay="CENTER" prefHeight="27.0" prefWidth="142.0" text="Algoritam" textAlignment="CENTER">
+					<padding>
+						<Insets bottom="5.0" left="5.0" right="5.0" />
+					</padding>
+					<font>
+						<Font name="Verdana Bold" size="20.0" />
+					</font>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+				</Label>
+				<RadioButton fx:id="radio_gen" mnemonicParsing="false" onAction="#showGenParameters" selected="true" text="Genetski algoritam">
+					<toggleGroup>
+						<ToggleGroup fx:id="algoritmi" />
+					</toggleGroup>
+					<padding>
+						<Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+					</padding>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <font>
+                  <Font name="Verdana" size="13.0" />
+               </font>
+				</RadioButton>
+				<RadioButton fx:id="pso_gen" mnemonicParsing="false" onAction="#showPSOParameters" text="PSO algoritam" toggleGroup="$algoritmi">
+					<padding>
+						<Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+					</padding>
+               <font>
+                  <Font name="Verdana" size="13.0" />
+               </font>
+				</RadioButton>
+				<Label fx:id="pso_iter_txt" scaleShape="false" text=" Broj iteracija:">
+					<padding>
+						<Insets top="5.0" />
+					</padding>
+               <VBox.margin>
+                  <Insets left="25.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Verdana" size="12.0" />
+               </font>
+				</Label>
+				<TextField fx:id="pso_iter" text="8">
+					<VBox.margin>
+						<Insets left="25.0" />
+					</VBox.margin>
+				</TextField>
+				<Label fx:id="pso_pop_txt" text=" Broj jedinki:">
+					<padding>
+						<Insets top="5.0" />
+					</padding>
+               <VBox.margin>
+                  <Insets left="25.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Verdana" size="12.0" />
+               </font>
+				</Label>
+				<TextField fx:id="pso_pop" text="5">
+               <VBox.margin>
+                  <Insets left="25.0" />
+               </VBox.margin></TextField>
+				<Label fx:id="pso_tol_txt" prefHeight="20.0" prefWidth="175.0" text="Tolerancija kamera (%)">
+					<padding>
+						<Insets top="5.0" />
+					</padding>
+               <VBox.margin>
+                  <Insets left="25.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Verdana" size="12.0" />
+               </font>
+				</Label>
+				<TextField fx:id="pso_tol"  text="0.001">
+               <VBox.margin>
+                  <Insets left="25.0" />
+               </VBox.margin>
+               </TextField>
+            <Label fx:id="pso_triang_tol_txt" scaleShape="false" text="Tolerancija izbora (%)">
+               <font>
+                  <Font name="Verdana" size="12.0" />
+               </font>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets left="25.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="pso_triang_tol" text="0.004">
+               <VBox.margin>
+                  <Insets left="25.0" />
+               </VBox.margin>
+            </TextField>
+               
+               <Label fx:id="pso_indiv_txt" scaleShape="false" text=" Individualni faktor:">
+                    <padding>
+                        <Insets top="5.0" />
+                    </padding>
+               <VBox.margin>
+                  <Insets left="25.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Verdana" size="12.0" />
+               </font>
+                </Label>
+                <TextField fx:id="pso_indiv" text="2">
+                    <VBox.margin>
+                        <Insets left="25.0" />
+                    </VBox.margin>
+                </TextField>
+                
+                <Label fx:id="pso_soc_txt" scaleShape="false" text=" Socijalni faktor:">
+                    <padding>
+                        <Insets top="5.0" />
+                    </padding>
+               <VBox.margin>
+                  <Insets left="25.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Verdana" size="12.0" />
+               </font>
+                </Label>
+                <TextField fx:id="pso_soc" text="2">
+                    <VBox.margin>
+                        <Insets left="25.0" />
+                    </VBox.margin>
+                </TextField>
+				<RadioButton fx:id="heur_ger" mnemonicParsing="false" onAction="#showGreedyParameters" text="Heuristički greedy" toggleGroup="$algoritmi">
+					<VBox.margin>
+						<Insets />
+					</VBox.margin>
+					<padding>
+						<Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+					</padding>
+               <font>
+                  <Font name="Verdana" size="13.0" />
+               </font>
+				</RadioButton>
+				<ComboBox fx:id="heuristika" prefHeight="27.0" prefWidth="224.0" promptText="(heuristika)">
+					<items>
+						<FXCollections fx:factory="observableArrayList">
+							<String fx:value="najveća površina" />
+							<String fx:value="najveći opseg" />
+						</FXCollections>
+					</items>
+					<HBox.margin>
+						<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+					</HBox.margin>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="25.0" top="5.0" />
+               </VBox.margin>
+				</ComboBox>
+				<ComboBox fx:id="pokrivac" prefHeight="27.0" prefWidth="224.0" promptText="(početni pokrivač)" BorderPane.alignment="CENTER">
+					<items>
+						<FXCollections fx:factory="observableArrayList">
+							<String fx:value="Vrhovi poligona" />
+							<String fx:value="Triangulacija poligona" />
+							<String fx:value="Unija prve dvije opcije" />
+						</FXCollections>
+					</items>
+					<BorderPane.margin>
+						<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+					</BorderPane.margin>
+               <VBox.margin>
+                  <Insets left="25.0" top="10.0" />
+               </VBox.margin>
+				</ComboBox>
+            <Label fx:id="gre_tol_txt" layoutX="35.0" layoutY="216.0" text=" Tolerancija (%):">
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets left="25.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Verdana" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="gre_tol" layoutX="35.0" layoutY="238.0" text="0.01">
+               <VBox.margin>
+                  <Insets left="25.0" />
+               </VBox.margin>
+            </TextField>
+				<RadioButton fx:id="hybrid" mnemonicParsing="false" onAction="#showHybParameters" text="Hibridni algoritam" toggleGroup="$algoritmi">
+					<VBox.margin>
+						<Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+					</VBox.margin>
+               <font>
+                  <Font name="Verdana" size="13.0" />
+               </font>
+				</RadioButton>
+           <ComboBox fx:id="hybHeuristika" prefHeight="27.0" prefWidth="224.0" promptText="(heuristika)">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="najveća površina" />
+                            <String fx:value="najveći opseg" />
+                        </FXCollections>
+                    </items>
+                    <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </HBox.margin>
+               <VBox.margin>
+                  <Insets left="25.0" top="5.0" />
+               </VBox.margin>
+                </ComboBox>
+            <ComboBox fx:id="hybPokrivac" prefHeight="27.0" prefWidth="224.0" promptText="(početni pokrivač)" BorderPane.alignment="CENTER">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Vrhovi poligona" />
+                            <String fx:value="Triangulacija poligona" />
+                            <String fx:value="Unija prve dvije opcije" />
+                        </FXCollections>
+                    </items>
+                    <BorderPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </BorderPane.margin>
+               <VBox.margin>
+                  <Insets left="25.0" top="10.0" />
+               </VBox.margin>
+                </ComboBox>
+            <Label fx:id="hyb_tol_txt" layoutX="35.0" layoutY="359.0" text=" Tolerancija (%):">
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets left="25.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Verdana" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="hyb_tol" layoutX="35.0" layoutY="381.0" text="0.01">
+               <VBox.margin>
+                  <Insets left="25.0" />
+               </VBox.margin>
+            </TextField>
+			</children>
+			<padding>
+				<Insets right="40.0" />
+			</padding>
+		</VBox>
+	</right>
+	<bottom>
+		<HBox prefHeight="41.0" prefWidth="581.0">
+			<children>
+            <VBox>
+               <children>
+      				<Label fx:id="odabr_dat" alignment="TOP_CENTER" centerShape="false" nodeOrientation="LEFT_TO_RIGHT" opacity="0.59" prefHeight="17.0" prefWidth="246.0" text="Datoteka nije odabrana" textAlignment="JUSTIFY" textFill="#7c7171">
+      					<HBox.margin>
+      						<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      					</HBox.margin>
+                     <font>
+                        <Font name="Verdana" size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+      				</Label>
+                  <Button fx:id="browse" mnemonicParsing="false" onAction="#onFileChooseClicked" prefHeight="27.0" prefWidth="236.0" text="Pretraži">
+                     <font>
+                        <Font name="Verdana Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </VBox>
+				<RadioButton fx:id="radio_tloc" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="75.0" text="tlocrt">
+					<HBox.margin>
+						<Insets bottom="10.0" left="40.0" right="5.0" top="10.0" />
+					</HBox.margin>
+					<toggleGroup>
+						<ToggleGroup fx:id="resurs" />
+					</toggleGroup>
+               <font>
+                  <Font name="Verdana Bold" size="13.0" />
+               </font>
+				</RadioButton>
+				<RadioButton fx:id="radio_dat" mnemonicParsing="false" prefHeight="28.0" prefWidth="138.0" selected="true" text="datoteka" textAlignment="JUSTIFY" toggleGroup="$resurs">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <font>
+                  <Font name="Verdana Bold" size="13.0" />
+               </font>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="30.0" top="10.0" />
+               </HBox.margin>
+				</RadioButton>
+            <ProgressIndicator fx:id="progress" progress="0.0">
+               <HBox.margin>
+                  <Insets left="35.0" />
+               </HBox.margin></ProgressIndicator>
+				<Button fx:id="button_nast" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#onButtonNext" prefHeight="34.0" prefWidth="168.0" text="Pokreni" HBox.hgrow="ALWAYS">
+					<font>
+						<Font name="Verdana Bold" size="14.0" />
+					</font>
+					<HBox.margin>
+						<Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+					</HBox.margin>
+				</Button>
+			</children>
+			<BorderPane.margin>
+				<Insets bottom="10.0" left="10.0" right="10.0" />
+			</BorderPane.margin>
+		</HBox>
+	</bottom>
+	<center>
+		<Canvas fx:id="canvas" height="450.0" onMouseClicked="#onImageViewClicked" styleClass="canvas" width="530.0">
+         <effect>
+            <ColorAdjust />
+         </effect></Canvas>
+	</center>
+</BorderPane>
